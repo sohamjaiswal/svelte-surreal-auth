@@ -1,3 +1,5 @@
+# SvelteKit Surreal Auth
+
 ## Credit where it's due
 NGL I was pretty lost when I started this out due to how surrealdb interacts with the server AND THE CLIENT DIRECTLY!! 
 
