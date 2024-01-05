@@ -1,0 +1,42 @@
+version: "3.3"
+
+services:
+  # so the server and the client both need to connect to the db, due to the docker network, 
+  # the server can connect to the db using the db container name as the host, but the client
+  # needs to connect to the db using the host machine's ip address, i havent figured out how to
+  # make the client connect to the db using the db container name as the host
+  # so for now run the webapp directly without docker 
+  # web:
+  #   container_name: web
+  #   restart: unless-stopped
+  #   build: 
+  #     context: .
+  #     dockerfile: ./docker/shared/web.dockerfile
+  #   ports:
+  #     - 5173:5173
+  #   volumes:
+  #     - ./web:/app
+  #   env_file:
+  #     - .env
+  database:
+    container_name: database
+    restart: unless-stopped
+    env_file:
+      - .env
+    entrypoint:
+      - /surreal
+      - start
+      - --allow-guests
+      - --auth
+      - --log
+      - $DB_LOG_LEVEL
+      - --user
+      - $DB_USER
+      - --pass
+      - $DB_PASSWORD
+      - file:/db
+    volumes:
+      - ./db/data:/db
+    image: surrealdb/surrealdb:v1.0.2
+    ports:
+      - 8000:8000
