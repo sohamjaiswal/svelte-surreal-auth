@@ -6,6 +6,9 @@ NGL I was pretty lost when I started this out due to how surrealdb interacts wit
 and the repo below helped me greatly develop an implementation that JUST WORKED
 https://github.com/oskar-gmerek/surreal-sveltekit
 
+## What is this
+A basic bare bones implementation of surrealdb auth in a sveltekit app, nothing more
+
 ## Current ISSUES
 with my current experience I'd say that you'd require to have 2 separate surreal clients in your sveltekit app, one for client side and another for server side interactions if you use the app and db both on the docker compose vnet... as just one would break the app for networks outside that specific network scope (client side breaks)
 
