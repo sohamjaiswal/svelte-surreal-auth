@@ -14,6 +14,13 @@ with my current experience I'd say that you'd require to have 2 separate surreal
 ## Workaround 
 Only the db is running in docker, the web app is being hosted native currently... 
 
+### Pros & Cons of this
+Pro:
+You only need to host the db on a vps while the app can be served independently on the vps or say an edge n/w
+
+Con: 
+You dont have a choice otherwise rn lol... 
+
 ## How to run 
 1. docker compose up
 2. then sign into the root under db: ssa and ns: ssa
