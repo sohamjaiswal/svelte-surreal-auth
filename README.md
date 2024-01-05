@@ -3,8 +3,7 @@
 ## Credit where it's due
 NGL I was pretty lost when I started this out due to how surrealdb interacts with the server AND THE CLIENT DIRECTLY!! 
 
-and the repo below helped me greatly develop an implementation that JUST WORKED
-https://github.com/oskar-gmerek/surreal-sveltekit
+and the repo below helped me greatly develop an implementation that JUST WORKED... [check it out here](https://github.com/oskar-gmerek/surreal-sveltekit)
 
 ## What is this
 A basic bare bones implementation of surrealdb auth in a sveltekit app, nothing more
