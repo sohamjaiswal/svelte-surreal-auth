@@ -8,24 +8,28 @@ and the repo below helped me greatly develop an implementation that JUST WORKED.
 ## What is this
 A basic bare bones implementation of surrealdb auth in a sveltekit app, nothing more
 
-## Current ISSUES
-with my current experience I'd say that you'd require to have 2 separate surreal clients in your sveltekit app, one for client side and another for server side interactions if you use the app and db both on the docker compose vnet... as just one would break the app for networks outside that specific network scope (client side breaks)
+## DB Connection Implementation
+### Development/Local Implementation
+> If you are a madman that has a public domain pointed to your home internet, use the prod guide lol
+![Development Architecture](assets/local_arch.png)
+#### How to run 
+1. point database (surreal container name in this proj) to 127.0.0.1 through /etc/hosts
+2. docker compose up
+3. then sign into the root under db: ssa and ns: ssa
+4. run the surql script given [here](db/migrations/initial.surql)
+5. run the project with bun/yarn/pnpm/npm anything
+6. /login and /register would be the urls of your interest
+7. after registration, you'd be redirected to login page
+8. after login you should see a console log in the inspector about the user you signed in with
 
-## Workaround 
-Only the db is running in docker, the web app is being hosted native currently... 
-
-### Pros & Cons of this
-Pro:
-You only need to host the db on a vps while the app can be served independently on the vps or say an edge n/w
-
-Con: 
-You dont have a choice otherwise rn lol... 
-
-## How to run 
-1. docker compose up
-2. then sign into the root under db: ssa and ns: ssa
-3. run the surql script given [here](db/migrations/initial.surql)
-4. run the project with bun/yarn/pnpm/npm anything
-5. /login and /register would be the urls of your interest
-6. after registration, you'd be redirected to login page
-7. after login you should see a console log in the inspector about the user you signed in with
+### Production (@ Bare Metal) Implementation
+![Production Architecture](assets/pub_arch.png)
+#### How to run
+1. configure your vps nginx to point to the apps in the project through your domain
+2. docker compose -f prod.docker-compose.yml up
+3. then sign into the root under db: ssa and ns: ssa
+4. run the surql script given [here](db/migrations/initial.surql)
+5. run the project with bun/yarn/pnpm/npm anything
+6. /login and /register would be the urls of your interest
+7. after registration, you'd be redirected to login page
+8. after login you should see a console log in the inspector about the user you signed in with
