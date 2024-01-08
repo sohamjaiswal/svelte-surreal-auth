@@ -1,4 +1,4 @@
-import { PUBLIC_SURREALDB_URL } from '$env/static/public';
+import { PUBLIC_SURREALDB_URL, PUBLIC_SURREALDB_NS, PUBLIC_SURREALDB_DB } from '$env/static/public';
 import { Surreal } from 'surrealdb.js';
 import type {Writable } from 'svelte/store';
 
@@ -20,7 +20,7 @@ const database = {
 					_db = new Surreal();
 
 					if (!DB_URL) return null;
-					await _db.connect(DB_URL, { namespace: 'ssa', database: 'ssa' });
+					await _db.connect(DB_URL, { namespace: PUBLIC_SURREALDB_NS, database: PUBLIC_SURREALDB_DB });
 				} catch (error) {
 					if (retries < MAX_RETRIES) {
 						retries++;

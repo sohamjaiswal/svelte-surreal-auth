@@ -1,13 +1,12 @@
 import { logout } from "$lib/logout";
-import { db } from "$lib/surreal";
 import type { User } from "$lib/types/User.type";
 import { error } from "@sveltejs/kit";
+import { db } from "$lib/surreal";
 
 export const handle = async ({ event, resolve }) => {
   const {cookies} = event;
 
   const token = cookies.get('token'); // Get token from cookie.
-
   if (token) {
     const authenticated = await db.authenticate(token).catch(async (err: Error) => {
 			console.log(`Error: ${err.message}. Session invalidation.`);
@@ -22,6 +21,7 @@ export const handle = async ({ event, resolve }) => {
 					throw error(500, 'Something wrong with database connection.');
 				})) as User;
 				event.locals.user = user;
+        event.locals.db = db;
 			}
 		} else {
 			// If not authenticated - invalidate session client side, server side and in SurrealDB.

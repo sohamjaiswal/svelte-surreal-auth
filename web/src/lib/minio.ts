@@ -1,7 +1,6 @@
 import {MINIO_ACCESS_KEY, MINIO_SECRET_KEY, NODE_ENV} from '$env/static/private'
 import { Client } from 'minio'
 
-console.log(MINIO_ACCESS_KEY, MINIO_SECRET_KEY)
 export const client = new Client({
   endPoint: 'minio1',
   port: 9000,
